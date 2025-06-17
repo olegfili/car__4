@@ -3,11 +3,17 @@ import transport.category.DriverB;
 import transport.category.DriverC;
 import transport.category.DriverD;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) throws CategoryException {
         DriverB driverB = new DriverB("Катунов Артем Викторович", true, 7, "B");
         DriverC driverC = new DriverC("Петров Виктор Юрьевич", true, 8, "C");
         DriverD driverD = new DriverD("Петров Владимир Юрьевич", true, 10, "D");
+
+        Mechanic <Transport> mechanic1 = new Mechanic<>("Василий Крюков", "Движок");
+        Mechanic <Transport> mechanic2 = new Mechanic<>("Сергей Орлов", "Авто Профи");
 
         Car car1 = new Car("BMW", "Х5", 3.0, TypeOfBody.SEDAN);
         System.out.println(car1);
@@ -44,6 +50,7 @@ public class Main {
         bus1.service();
         car1.service();
 
+        car1.setDriver(driverB);
         car2.setDriver(driverB);
         bus3.setDriver(driverD);
         printInfo(bus3);
@@ -51,6 +58,59 @@ public class Main {
         driverC.infoDriver();
         driverD.infoDriver();
         category(driverB, driverC, driverD);
+
+
+        mechanic1.infoMechanic();
+
+
+
+        List<Transport> raceTransport = new ArrayList<>();
+        raceTransport.add(car1);
+        raceTransport.add(car2);
+        raceTransport.add(car3);
+        raceTransport.add(car4);
+        raceTransport.add(truck1);
+        raceTransport.add(truck2);
+        raceTransport.add(truck3);
+        raceTransport.add(truck4);
+        raceTransport.add(bus1);
+        raceTransport.add(bus2);
+        raceTransport.add(bus3);
+        raceTransport.add(bus4);
+        System.out.println("Участники автогонки:");
+        for (Transport transport : raceTransport){
+            System.out.println(transport);
+        }
+
+        mechanic1.addTransport(car1);
+        mechanic1.addTransport(car2);
+        mechanic1.addTransport(truck1);
+        mechanic1.addTransport(bus2);
+        mechanic2.addTransport(bus1);
+        mechanic2.addTransport(bus3);
+
+        mechanic1.carryOutMaintenance(car1);
+        mechanic1.carryOutMaintenance(truck1);
+        mechanic1.carryOutMaintenance(bus2);
+        mechanic2.carryOutMaintenance(bus3);
+
+        mechanic1.fixTheCar(car1);
+        mechanic1.fixTheCar(truck1);
+        mechanic1.fixTheCar(bus2);
+        mechanic2.fixTheCar(bus3);
+
+        ServiceStation <Car> carServiceStation = new ServiceStation<>();
+        ServiceStation <Bus> busServiceStation = new ServiceStation<>();
+        ServiceStation <Trucks> trucksServiceStation = new ServiceStation<>();
+        carServiceStation.addCar(car1);
+        carServiceStation.addCar(car2);
+        trucksServiceStation.addCar(truck1);
+        busServiceStation.addCar(bus1);
+        carServiceStation.technicalInspection();
+        trucksServiceStation.technicalInspection();
+
+        car1.transportInfo();
+        bus3.transportInfo();
 
 
     }

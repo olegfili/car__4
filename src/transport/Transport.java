@@ -1,16 +1,21 @@
 package transport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Transport <T extends Driver> implements Competing {
     private String brand;
     private String model;
     private double engineVolume;
     private T driver;
+    private List<Mechanic> mechanics;
 
     public Transport(String brand, String model, double engineVolume) {
         setBrand(brand);
         setModel(model);
         setEngineVolume(engineVolume);
         setDriver(driver);
+        this.mechanics = new ArrayList<>();
     }
 
     public String getBrand() {
@@ -71,4 +76,19 @@ public abstract class Transport <T extends Driver> implements Competing {
                 "объем двигателя: " + engineVolume;
     }
 
+    public void addMechanic (Mechanic mechanic) {
+        mechanics.add(mechanic);
+    }
+
+    public List<Mechanic> getMechanics(){
+        return mechanics;
+    }
+
+    public void transportInfo() {
+        System.out.println("Водитель " + driver.getName() + " управляет " + getBrand() + " " + getModel());
+        for (Mechanic mechanic : mechanics) {
+            System.out.println("Механик - " + mechanic.getName());
+        }
+        System.out.println();
+    }
 }
