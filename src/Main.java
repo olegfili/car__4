@@ -4,7 +4,9 @@ import transport.category.DriverC;
 import transport.category.DriverD;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws CategoryException {
@@ -111,6 +113,18 @@ public class Main {
 
         car1.transportInfo();
         bus3.transportInfo();
+
+
+
+        Set<Driver> driverSet = new HashSet<>();
+        driverSet.add(driverB);
+        driverSet.add(driverC);
+        driverSet.add(driverD);
+        driverSet.add(driverB);
+        System.out.println("Список водителей:");
+        for (Driver driver : driverSet){
+            System.out.println(driver.getName());
+        }
 
 
     }
