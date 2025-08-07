@@ -1,5 +1,7 @@
 package transport;
 
+import java.util.Objects;
+
 public  abstract class Driver {
     private String name;
     private boolean hasDriverLicense;
@@ -57,5 +59,21 @@ public  abstract class Driver {
     public abstract void refill();
     public void infoDriver () {
         System.out.println("Водитель - " + getName() + ", лицензия - " + isHasDriverLicense() + ", стаж вождения " + getExperienceInYear() + ", категория прав - " + getCategory());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Driver driver = (Driver) o;
+        return hasDriverLicense == driver.hasDriverLicense &&
+                experienceInYear == driver.experienceInYear &&
+                Objects.equals(name, driver.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, hasDriverLicense, experienceInYear);
     }
 }
