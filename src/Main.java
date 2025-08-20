@@ -126,6 +126,9 @@ public class Main {
             System.out.println(driver.getName());
         }
 
+        System.out.println();
+
+        System.out.println(Mechanic.getMechanicTransport());
 
     }
 
